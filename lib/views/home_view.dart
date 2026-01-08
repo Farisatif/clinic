@@ -15,7 +15,25 @@ class HomeView extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 5, 204, 161),
+        centerTitle: true,
+        elevation: 10,
+        shadowColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 0, 255, 200),
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.tealAccent,
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
