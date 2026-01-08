@@ -9,7 +9,7 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text("data"),
+      home: Text("issa"),
     );
   }
 }
