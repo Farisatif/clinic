@@ -1,3 +1,5 @@
+import 'package:clinic/views/home_view.dart';
+import 'package:clinic/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,7 +11,12 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text("issa"),
+       initialRoute: 'home',
+      routes: {
+        '/': (context) => SplashView(),
+        '/home': (context) => HomeView(),
+       
+      },
     );
   }
 }
