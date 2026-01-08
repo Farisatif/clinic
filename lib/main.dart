@@ -11,7 +11,7 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       initialRoute: 'home',
+       initialRoute: '//',
       routes: {
         '/': (context) => SplashView(),
         '/home': (context) => HomeView(),
