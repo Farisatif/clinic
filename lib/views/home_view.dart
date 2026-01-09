@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        elevation: 10,
+        elevation: 30,
         shadowColor: const Color.fromARGB(255, 6, 201, 191),
         backgroundColor: const Color.fromARGB(255, 0, 255, 200),
       ),

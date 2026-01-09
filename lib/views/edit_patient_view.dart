@@ -22,6 +22,8 @@ class _EditPatientViewState extends State<EditPatientView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 30,
+        shadowColor: const Color.fromARGB(255, 6, 201, 191),
         backgroundColor: Colors.teal,
         title: const Text('Edit Patient'),
       ),
