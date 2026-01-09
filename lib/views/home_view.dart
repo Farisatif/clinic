@@ -25,8 +25,8 @@ class HomeView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-
           children: [
+            SizedBox(height: 40),
             Text(
               "Welcome to the clinic",
               style: TextStyle(fontSize: 30, fontFamily: "ShortBaby-Mg2w"),

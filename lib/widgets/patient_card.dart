@@ -24,8 +24,8 @@ class PatientCard extends StatelessWidget {
           Navigator.pushNamed(context, routeName);
         },
         child: Container(
-          width: 400,
-          height: 250,
+          width: 500,
+          height: 200,
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 0, 255, 200),
             borderRadius: BorderRadius.circular(20),
@@ -43,7 +43,7 @@ class PatientCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(icon, color: Colors.black, size: 60),
+              Icon(icon, color: Colors.black, size: 80),
               const SizedBox(height: 6),
               Text(
                 Tx,
