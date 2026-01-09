@@ -1,3 +1,4 @@
+import 'package:clinic/views/Patient_record.dart';
 import 'package:clinic/views/add_patient_view.dart';
 import 'package:clinic/views/appointment_view.dart';
 import 'package:clinic/views/edit_patient_view.dart';
@@ -15,15 +16,15 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       initialRoute: '/',
       routes: {
         '/': (context) => SplashView(),
-        '/home': (context) => HomeView(),
+        '/home': (context) => Patientrecord(),
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),
         '/appointment': (context) => AppointmentView(),
         '/patient': (context) => PatientListView(),
+        '/Patient_record': (context) => Patientrecord(),
       },
     );
   }
