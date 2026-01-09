@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/custom_button.dart';
 
-class EditPatientView extends StatelessWidget {
+class EditPatientView extends StatefulWidget {
   const EditPatientView({super.key});
+
+  @override
+  State<EditPatientView> createState() => _EditPatientViewState();
+}
+
+class _EditPatientViewState extends State<EditPatientView> {
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+  AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
+
+  String? patientName;
+  String? phoneNumber;
+  String? age;
+  String? medicalNotes;
 
   @override
   Widget build(BuildContext context) {
@@ -14,39 +27,67 @@ class EditPatientView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formState,
+          autovalidateMode: _autoValidateMode,
+          child: Column(
+            spacing: 16,
+            children: [
+              CustomTextField(
+                label: 'Patient Name',
+                icon: Icons.person,
+                onChanged: (value) {
+                  patientName = value;
+                },
+              ),
+              CustomTextField(
+                label: 'Phone Number',
+                icon: Icons.calendar_today,
+                keyboardType: TextInputType.datetime,
+                onChanged: (value) {
+                  phoneNumber = value;
+                },
+              ),
+              Container(
+                margin: const EdgeInsets.only(right: 300),
+                child: CustomTextField(
+                  label: 'Age',
+                  icon: Icons.access_time,
+                  keyboardType: TextInputType.datetime,
+                  onChanged: (value) {
+                    age = value;
+                  },
+                ),
+              ),
+              CustomTextField(
+                label: 'Medical Notes',
+                icon: Icons.note,
+                maxLines: 3,
+                onChanged: (value) {
+                  medicalNotes = value;
+                },
+              ),
+              CustomButton(
+                text: 'Save Patient Data',
+                onPressed: () {
+                  if (_formState.currentState!.validate()) {
+                    print('Name: $patientName, Phone: $phoneNumber, Age: $age');
 
-        child: Column(
-          spacing: 16,
-          children: [
-            CustomTextField(label: 'Patient Name', icon: Icons.person),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Saving $patientName Data...'),
+                        backgroundColor: Colors.teal,
+                      ),
+                    );
+                  }
 
-            CustomTextField(
-              label: 'Appointment Date',
-              icon: Icons.calendar_today,
-              keyboardType: TextInputType.datetime,
-            ),
-
-            CustomTextField(
-              label: 'Appointment Time',
-              icon: Icons.access_time,
-              keyboardType: TextInputType.datetime,
-            ),
-
-            CustomTextField(
-              label: 'Reason for Visit',
-              icon: Icons.note,
-              maxLines: 3,
-            ),
-
-            CustomButton(
-              text: 'Confirm Booking',
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Save Button (UI Only)')),
-                );
-              },
-            ),
-          ],
+                  setState(() {
+                    _autoValidateMode = AutovalidateMode.always;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

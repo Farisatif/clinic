@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final TextInputType keyboardType;
   final int maxLines;
+  final void Function(String)? onChanged; 
 
   const CustomTextField({
     super.key,
@@ -12,11 +13,19 @@ class CustomTextField extends StatelessWidget {
     required this.icon,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onChanged: onChanged,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter $label';
+        }
+        return null;
+      },
       keyboardType: keyboardType,
       maxLines: maxLines,
       decoration: InputDecoration(
@@ -24,6 +33,14 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: Icon(icon, color: Colors.teal),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.red),
         ),
       ),
     );
