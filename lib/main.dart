@@ -23,8 +23,7 @@ class Clinic extends StatelessWidget {
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),
         '/appointment': (context) => AppointmentView(),
-        '/patient_view': (context) => PatientListView(),
-
+        '/patient': (context) => PatientListView(),
       },
     );
   }

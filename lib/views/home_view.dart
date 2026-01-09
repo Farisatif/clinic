@@ -32,30 +32,25 @@ class HomeView extends StatelessWidget {
               style: TextStyle(fontSize: 30, fontFamily: "ShortBaby-Mg2w"),
             ),
             SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-
+              spacing: 20,
               children: [
-                patient_card(
+                PatientCard(
                   icon: Icons.person,
                   Tx: "Patient presentation",
-                  Tb: "View",
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/patient_view');
-                  },
+                  routeName: '/patient',
                 ),
-                patient_card(
+                PatientCard(
                   icon: Icons.person,
                   Tx: "Quick addition",
-                  Tb: "New",
-                  onPressed: () {},
+                  routeName: '/add',
                 ),
-                patient_card(
+                PatientCard(
                   icon: Icons.person,
                   Tx: "Appointments",
-                  Tb: "View",
-                  onPressed: () {},
+                  routeName: '/appointment',
                 ),
               ],
             ),
