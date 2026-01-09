@@ -1,3 +1,4 @@
+import 'package:clinic/widgets/patient_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,23 +18,49 @@ class HomeView extends StatelessWidget {
         ),
         centerTitle: true,
         elevation: 10,
-        shadowColor: Colors.green,
+        shadowColor: const Color.fromARGB(255, 6, 201, 191),
         backgroundColor: const Color.fromARGB(255, 0, 255, 200),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Colors.tealAccent,
-                borderRadius: BorderRadius.circular(20),
-              ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            Text(
+              "Welcome to the clinic",
+              style: TextStyle(fontSize: 30, fontFamily: "ShortBaby-Mg2w"),
             ),
-          ),
-        ],
+            SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+
+              children: [
+                patient_card(
+                  icon: Icons.person,
+                  Tx: "Patient presentation",
+                  Tb: "View",
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/patient_view');
+                  },
+                ),
+                patient_card(
+                  icon: Icons.person,
+                  Tx: "Quick addition",
+                  Tb: "New",
+                  onPressed: () {},
+                ),
+                patient_card(
+                  icon: Icons.person,
+                  Tx: "Appointments",
+                  Tb: "View",
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

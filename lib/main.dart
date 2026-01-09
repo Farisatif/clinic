@@ -2,6 +2,7 @@ import 'package:clinic/views/add_patient_view.dart';
 import 'package:clinic/views/appointment_view.dart';
 import 'package:clinic/views/edit_patient_view.dart';
 import 'package:clinic/views/home_view.dart';
+import 'package:clinic/views/patient_list_view.dart';
 import 'package:clinic/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       initialRoute: '/',
       routes: {
         '/': (context) => SplashView(),
@@ -23,6 +25,13 @@ class Clinic extends StatelessWidget {
         '/appointment': (context) => AppointmentView(),
         
         
+=======
+      initialRoute: '//',
+      routes: {
+        '/': (context) => SplashView(),
+        '/home': (context) => HomeView(),
+        '/patient_view': (context) => PatientListView(),
+>>>>>>> 8ca6a8900b40d6d03a9b5601c82e037f91094057
       },
     );
   }
