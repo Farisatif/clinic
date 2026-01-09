@@ -44,13 +44,13 @@ class HomeView extends StatelessWidget {
                 ),
                 PatientCard(
                   icon: Icons.person,
-                  Tx: "Quick addition",
-                  routeName: '/add',
+                  Tx: "Appointments",
+                  routeName: '/appointment',
                 ),
                 PatientCard(
                   icon: Icons.person,
-                  Tx: "Appointments",
-                  routeName: '/appointment',
+                  Tx: "Quick edit patient",
+                  routeName: '/edit',
                 ),
               ],
             ),

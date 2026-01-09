@@ -60,7 +60,7 @@ class _PatientListViewState extends State<PatientListView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [Text(patientPhones[index])],
                   ),
-                  leading: const Icon(Icons.person),
+                  leading:  Icon(Icons.person),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
