@@ -15,7 +15,7 @@ class Clinic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
+
       initialRoute: '/',
       routes: {
         '/': (context) => SplashView(),
@@ -23,15 +23,8 @@ class Clinic extends StatelessWidget {
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),
         '/appointment': (context) => AppointmentView(),
-        
-        
-=======
-      initialRoute: '//',
-      routes: {
-        '/': (context) => SplashView(),
-        '/home': (context) => HomeView(),
         '/patient_view': (context) => PatientListView(),
->>>>>>> 8ca6a8900b40d6d03a9b5601c82e037f91094057
+
       },
     );
   }
