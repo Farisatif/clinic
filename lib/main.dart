@@ -19,7 +19,7 @@ class Clinic extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashView(),
-        '/home': (context) => Patientrecord(),
+        '/home': (context) => HomeView(),
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),
         '/appointment': (context) => AppointmentView(),

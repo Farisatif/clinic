@@ -10,6 +10,7 @@ class PatientListView extends StatefulWidget {
 class _PatientListViewState extends State<PatientListView> {
   List<String> patientNames = ['Issa', 'Alex', 'Maria', 'John'];
   List<String> patientPhones = ['55555', '44444', '33333', '22222'];
+  List<bool> isMale = [true, false, false, true];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _PatientListViewState extends State<PatientListView> {
         centerTitle: true,
         elevation: 30,
         shadowColor: const Color.fromARGB(255, 6, 201, 191),
-        backgroundColor: const Color.fromARGB(255, 0, 255, 200),
+        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 16),
@@ -37,7 +38,10 @@ class _PatientListViewState extends State<PatientListView> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color:
+                      isMale[index]
+                          ? const Color.fromARGB(255, 7, 189, 213)
+                          : const Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: const [
                     BoxShadow(
@@ -54,19 +58,43 @@ class _PatientListViewState extends State<PatientListView> {
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text(patientNames[index])],
+                    children: [
+                      Text(
+                        patientNames[index],
+                        style: TextStyle(
+                          fontFamily: 'ShortBaby-Mg2w',
+                          fontSize: 40,
+                          color: isMale[index] ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
                   subtitle: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [Text(patientPhones[index])],
                   ),
-                  leading:  Icon(Icons.person),
+                  leading:
+                      isMale[index]
+                          ? Icon(
+                            Icons.person,
+                            size: 40,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                          )
+                          : Icon(
+                            Icons.person,
+                            size: 40,
+                            color: const Color.fromARGB(255, 228, 52, 208),
+                          ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      Icon(Icons.edit, color: Colors.blue),
-                      SizedBox(width: 20),
                       Icon(Icons.delete, color: Colors.red),
+                      SizedBox(width: 10),
+                      Icon(
+                        Icons.done,
+                        size: 40,
+                        color: Color.fromARGB(255, 0, 255, 213),
+                      ),
                     ],
                   ),
                 ),
