@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 20,
+                spacing: 10,
                 children: [
                   PatientCard(
                     icon: Icons.person,
