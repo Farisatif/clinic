@@ -18,15 +18,14 @@ class PatientCard extends StatelessWidget {
         },
         child: Container(
           margin: EdgeInsets.only(bottom: 40),
-          width: 500,
-          height: 200,
+          width: 150,
+          height: 100,
           decoration: BoxDecoration(
             color: model.Bcolor,
             borderRadius: BorderRadius.circular(20),
-
-            boxShadow:  [
+            boxShadow: [
               BoxShadow(
-                color:model.color,
+                color: model.color,
                 blurRadius: 3,
                 spreadRadius: 1,
                 offset: Offset(0, 3),
@@ -36,25 +35,21 @@ class PatientCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(model.icon,color: model.color,size: 60,),
+              Icon(model.icon, color: model.color, size: 40),
               const SizedBox(height: 6),
               Text(
                 model.Tx,
                 style: const TextStyle(
-                  fontSize: 40,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                   fontFamily: 'ShortBaby-Mg2w',
                 ),
               ),
-
             ],
           ),
-          
         ),
-        
       ),
-      
     );
   }
 }

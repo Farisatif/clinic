@@ -27,16 +27,28 @@ class _SplashViewState extends State<SplashView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage("assets/images/Clinic_img.jpg"),
-              radius: 150,
+              backgroundImage: const AssetImage("assets/images/Clinic_img.jpg"),
+              radius: 120, // حجم طبيعي
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Clinic App',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 36,
+                fontFamily: 'ShortBaby-Mg2w',
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 7, 189, 213),
+              ),
             ),
-            SizedBox(height: 10),
-            Text('Medical Appointment System', style: TextStyle(fontSize: 14)),
+            const SizedBox(height: 10),
+            const Text(
+              'Medical Appointment System',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'ShortBaby-Mg2w',
+                color: Colors.black54,
+              ),
+            ),
           ],
         ),
       ),

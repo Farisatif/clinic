@@ -18,7 +18,7 @@ class Clinic extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashView(),
+        '/': (context)=> SplashView(),
         '/home': (context) => HomeView(),
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),

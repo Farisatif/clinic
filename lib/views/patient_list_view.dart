@@ -16,91 +16,100 @@ class _PatientListViewState extends State<PatientListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
+        centerTitle: true,
         title: const Text(
-          "patient list",
+          "Patient List",
           style: TextStyle(
             fontFamily: 'ShortBaby-Mg2w',
             fontSize: 20,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
-        centerTitle: true,
-        elevation: 30,
-        shadowColor: const Color.fromARGB(255, 6, 201, 191),
-        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: ListView.builder(
-          itemCount: patientNames.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  color:
-                      isMale[index]
-                          ? const Color.fromARGB(255, 7, 189, 213)
-                          : const Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 8,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        patientNames[index],
-                        style: TextStyle(
-                          fontFamily: 'ShortBaby-Mg2w',
-                          fontSize: 40,
-                          color: isMale[index] ? Colors.white : Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text(patientPhones[index])],
-                  ),
-                  leading:
-                      isMale[index]
-                          ? Icon(
-                            Icons.person,
-                            size: 40,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                          )
-                          : Icon(
-                            Icons.person,
-                            size: 40,
-                            color: const Color.fromARGB(255, 228, 52, 208),
-                          ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(Icons.delete, color: Colors.red),
-                      SizedBox(width: 10),
-                      Icon(
-                        Icons.done,
-                        size: 40,
-                        color: Color.fromARGB(255, 0, 255, 213),
-                      ),
-                    ],
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            children: [
+              const Text(
+                "Patient List",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontFamily: 'ShortBaby-Mg2w',
+                  color: Colors.black,
                 ),
               ),
-            );
-          },
+              const SizedBox(height: 30),
+              Column(
+                children: List.generate(patientNames.length, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isMale[index]
+                            ? const Color.fromARGB(255, 7, 189, 213)
+                            : const Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        leading: Icon(
+                          Icons.person,
+                          size: 40,
+                          color: isMale[index]
+                              ? Colors.white
+                              : const Color.fromARGB(255, 228, 52, 208),
+                        ),
+                        title: Center(
+                          child: Text(
+                            patientNames[index],
+                            style: TextStyle(
+                              fontFamily: 'ShortBaby-Mg2w',
+                              fontSize: 30,
+                              color: isMale[index] ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                        subtitle: Center(
+                          child: Text(
+                            patientPhones[index],
+                            style: const TextStyle(
+                              fontFamily: 'ShortBaby-Mg2w',
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.delete, color: Colors.red),
+                            SizedBox(width: 10),
+                            Icon(
+                              Icons.done,
+                              size: 30,
+                              color: Color.fromARGB(255, 0, 255, 213),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );

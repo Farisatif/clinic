@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'ShortBaby-Mg2w',
             fontSize: 20,
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
@@ -29,78 +29,89 @@ class HomeView extends StatelessWidget {
             children: [
               const SizedBox(height: 40),
               Container(
-                padding: EdgeInsets.all(30),
-
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(0, 0, 0, 0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 7, 189, 213),
-                      blurRadius: 10,
-                      spreadRadius: 450,
-                      offset: Offset(0, 400),
-                    ),
-                  ],
-                ),
+                padding: const EdgeInsets.all(30),
+                color: Colors.transparent,
                 child: Column(
-                  children: [
-                    Text("Welcome ",
+                  children: const [
+                    Text(
+                      "Welcome",
                       style: TextStyle(
                         fontSize: 60,
                         fontFamily: "ShortBaby-Mg2w",
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                      ),),
+                        color: Colors.black,
+                      ),
+                    ),
                     Text(
                       "to the clinic",
                       style: TextStyle(
                         fontSize: 60,
                         fontFamily: "ShortBaby-Mg2w",
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 7, 189, 213),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 100,
-                width: 100,
-                child: VerticalDivider(
-                  indent: 0,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-              ),
+              const SizedBox(height: 50),
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   PatientCard(
                     model: PatientModel(
                       Bcolor: const Color.fromARGB(255, 15, 154, 173),
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      Tx: "Appointments",
-                      icon: Icons.person,
-                      routeName: '/Patient_record',
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  PatientCard(
-                    model: PatientModel(
-                      Bcolor: const Color.fromARGB(255, 7, 120, 213),
-                      color:  const Color.fromARGB(255, 0, 0, 0),
+                      color: const Color.fromARGB(255, 10, 10, 10),
                       Tx: "Add",
                       icon: Icons.add,
                       routeName: '/add',
                     ),
                   ),
-                  const SizedBox(height: 20),
                   PatientCard(
                     model: PatientModel(
-                      Bcolor: const Color.fromARGB(255, 255, 45, 45),
+                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
+                      color: const Color.fromARGB(255, 9, 9, 9),
                       Tx: "Today",
-                      color: const Color.fromARGB(255, 0, 0, 0),
                       icon: Icons.today,
                       routeName: '/patient',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PatientCard(
+                    model: PatientModel(
+                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
+                      color: const Color.fromARGB(255, 7, 7, 7),
+                      Tx: "Edit",
+                      icon: Icons.edit,
+                      routeName: '/edit',
+                    ),
+                  ),
+                  PatientCard(
+                    model: PatientModel(
+                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
+                      color: const Color.fromARGB(255, 5, 5, 5),
+                      Tx: "Appointment",
+                      icon: Icons.book_online,
+                      routeName: '/appointment',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PatientCard(
+                    model: PatientModel(
+                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
+                      color: const Color.fromARGB(255, 5, 5, 5),
+                      Tx: "Appointment",
+                      icon: Icons.book_online,
+                      routeName: '/Patient_record',
                     ),
                   ),
                 ],

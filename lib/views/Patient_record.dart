@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Patientrecord extends StatelessWidget {
   Patientrecord({super.key});
-  List<String> New = [
+
+  final List<String> patientNames = [
     "Fares",
     "Aroa",
     "Hifaa",
@@ -13,114 +14,165 @@ class Patientrecord extends StatelessWidget {
     "Omar",
     "Hinata",
   ];
-  List<bool> TorF = [true, false, false, true, true, false, true, true, false];
+
+  final List<bool> isMale = [
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: 
-      GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2 / 1,
-          mainAxisSpacing: 5,
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
+        centerTitle: true,
+        title: const Text(
+          "Patient Records",
+          style: TextStyle(
+            fontFamily: 'ShortBaby-Mg2w',
+            fontSize: 18,
+            color: Colors.white,
+          ),
         ),
-        itemCount: New.length,
-
-        itemBuilder: (context, index) {
-          return Container(
-          
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(10),
-
-            decoration: BoxDecoration(
-              
-              boxShadow: const [
-                
-                BoxShadow(
-                  color: Color.fromARGB(255, 101, 101, 101),
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                  offset: Offset(2, 2),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const Text(
+                "Patient Records",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontFamily: 'ShortBaby-Mg2w',
+                  color: Colors.black,
                 ),
-              ],
-              borderRadius: BorderRadius.circular(10),
-              color:
-                  TorF[index]
-                      ? const Color.fromARGB(255, 0, 0, 0)
-                      : const Color.fromARGB(255, 255, 186, 245),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TorF[index]
-                    ? Icon(
-                      Icons.male,
-                      color: const Color.fromARGB(161, 255, 255, 255),
-                      size: 60,
-                    )
-                    : Icon(
-                      Icons.female,
-                      color: const Color.fromARGB(158, 255, 64, 128),
-                      size: 60,
-                    ),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      New[index],
-                      style: TextStyle(
-                        color:
-                            TorF[index]
-                                ? const Color.fromARGB(255, 255, 255, 255)
-                                : const Color.fromARGB(255, 0, 0, 0),
-                        fontFamily: 'ShortBaby-Mg2w',
-                        fontSize: 30,
-                      ),
-                    ),
-                    Text(
-                      "data",
-                      style: TextStyle(
-                        color:
-                            TorF[index]
-                                ? const Color.fromARGB(255, 221, 98, 207)
-                                : const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                    Text(
-                      "data",
-                      style: TextStyle(
-                        color:
-                            TorF[index]
-                                ? const Color.fromARGB(255, 106, 106, 106)
-                                : const Color.fromARGB(178, 221, 98, 207),
-                      ),
-                    ),
-                  ],
+              ),
+              const SizedBox(height: 16),
+              GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.0 / 1,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon:  Icon(Icons.edit, color: Colors.blue),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/edit');
-                          
-                        },
-                      ),
-
-                      SizedBox(width: 8),
-                      Icon(Icons.delete, color: Colors.red),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+                itemCount: patientNames.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color:
+                          isMale[index]
+                              ? const Color.fromARGB(255, 7, 189, 213)
+                              : const Color.fromARGB(255, 255, 186, 245),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 6,
+                          offset: Offset(1, 1),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          isMale[index] ? Icons.male : Icons.female,
+                          size: 30,
+                          color:
+                              isMale[index]
+                                  ? Colors.white
+                                  : const Color.fromARGB(255, 255, 64, 128),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              patientNames[index],
+                              style: TextStyle(
+                                fontFamily: 'ShortBaby-Mg2w',
+                                fontSize: 16,
+                                color:
+                                    isMale[index] ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            Text(
+                              "Data",
+                              style: TextStyle(
+                                fontSize: 10,
+                                color:
+                                    isMale[index]
+                                        ? const Color.fromARGB(
+                                          255,
+                                          221,
+                                          98,
+                                          207,
+                                        )
+                                        : Colors.black,
+                              ),
+                            ),
+                            Text(
+                              "Data",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color:
+                                    isMale[index]
+                                        ? const Color.fromARGB(
+                                          255,
+                                          106,
+                                          106,
+                                          106,
+                                        )
+                                        : const Color.fromARGB(
+                                          178,
+                                          221,
+                                          98,
+                                          207,
+                                        ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.blue,
+                                size: 20,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/edit');
+                              },
+                            ),
+                            const SizedBox(width: 4),
+                            const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
