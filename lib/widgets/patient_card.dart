@@ -5,7 +5,6 @@ class PatientCard extends StatelessWidget {
   const PatientCard({super.key, required this.model});
 
   final PatientModel model;
-
   @override
   Widget build(BuildContext context) {
     return Material(
