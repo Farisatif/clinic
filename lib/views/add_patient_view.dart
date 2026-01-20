@@ -1,11 +1,11 @@
 import 'package:clinic/helpers/databasehelper.dart';
+import 'package:clinic/models/patient_model.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/custom_button.dart';
 
 class AddPatientView extends StatefulWidget {
   const AddPatientView({super.key});
-
   @override
   State<AddPatientView> createState() => _AddPatientViewState();
 }
@@ -14,18 +14,25 @@ class _AddPatientViewState extends State<AddPatientView> {
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
 
-  String? fullName, phoneNumber, age, medicalNotes,gender ;
+  String? fullName, phoneNumber, age, medicalNotes, gender;
+  bool isMale = true;
 
-  insertPatientData() async{
-    DatabaseHelper db = DatabaseHelper.instance;
-    int response = await db.insertData(table: 'patients', values: {
-      'name':fullName!,
-      'age':int.parse(age!),
-      'phone':phoneNumber!,
-      'medical_notes':medicalNotes!,
-      'gender':gender!,
-    });
-  }
+  PatientModelData patientData = PatientModelData(
+    fullName: null,
+    phoneNumber: null,
+    age: null,
+    medicalNotes: null,
+    gender: null,
+  );
+
+  // insertPatientData() async {
+  //   DatabaseHelper db = DatabaseHelper.instance;
+  //   int response = await db.insertData(
+  //     table: 'patients',
+  //     //values: patientData.toMap(),
+  //   );
+  //   return response;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +71,29 @@ class _AddPatientViewState extends State<AddPatientView> {
                   child: Column(
                     spacing: 40,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            isMale ? "Male" : "Female",
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontFamily: 'ShortBaby-Mg2w',
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          Switch(
+                            value: isMale,
+                            onChanged: (value) {
+                              setState(() {
+                                isMale = value;
+                                gender = isMale ? 'Male' : 'Female';
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                       CustomTextField(
                         label: 'Full Name',
                         icon: Icons.person,
@@ -95,9 +125,6 @@ class _AddPatientViewState extends State<AddPatientView> {
                       CustomButton(
                         text: 'Save Patient Data',
                         onPressed: () {
-                          //-------------------------------
-                          // Validate form fields
-                          //input in the text fields entered by user
                           if (_formstate.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

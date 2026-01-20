@@ -16,7 +16,7 @@ class PatientCard extends StatelessWidget {
           Navigator.pushNamed(context, model.routeName);
         },
         child: Container(
-          margin: EdgeInsets.only(bottom: 40),
+          margin: EdgeInsets.only(bottom: 10),
           width: 150,
           height: 100,
           decoration: BoxDecoration(

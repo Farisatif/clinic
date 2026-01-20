@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
     required this.icon,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
-    this.onChanged,
+    this.onChanged, 
   });
 
   @override
