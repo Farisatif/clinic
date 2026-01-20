@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/custom_button.dart';
 
-
 class AddPatientView extends StatefulWidget {
   const AddPatientView({super.key});
 
@@ -14,8 +13,9 @@ class _AddPatientViewState extends State<AddPatientView> {
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
 
-  String? fullName, phoneNumber, age, medicalNotes;
+  bool isMale = true;
 
+  String? fullName, phoneNumber, age, medicalNotes;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +53,14 @@ class _AddPatientViewState extends State<AddPatientView> {
                   child: Column(
                     spacing: 40,
                     children: [
+                      Text(isMale?"Male":"Fimale",style: TextStyle(fontSize: 30),),
+                      Switch(
+                        value: isMale,
+                        onChanged: (value) {
+                          setState(() {});
+                          isMale = value;
+                        },
+                      ),
                       CustomTextField(
                         label: 'Full Name',
                         icon: Icons.person,

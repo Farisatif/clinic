@@ -90,30 +90,6 @@ class HomeView extends StatelessWidget {
                       routeName: '/edit',
                     ),
                   ),
-                  PatientCard(
-                    model: PatientModel(
-                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
-                      color: const Color.fromARGB(255, 5, 5, 5),
-                      Tx: "Appointment",
-                      icon: Icons.book_online,
-                      routeName: '/appointment',
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PatientCard(
-                    model: PatientModel(
-                      Bcolor: const Color.fromARGB(255, 15, 154, 173),
-                      color: const Color.fromARGB(255, 5, 5, 5),
-                      Tx: "Appointment",
-                      icon: Icons.book_online,
-                      routeName: '/Patient_record',
-                    ),
-                  ),
                 ],
               ),
             ],
