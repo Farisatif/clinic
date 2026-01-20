@@ -2,6 +2,7 @@ import 'package:clinic/views/add_patient_view.dart';
 import 'package:clinic/views/appointment_view.dart';
 import 'package:clinic/views/edit_patient_view.dart';
 import 'package:clinic/views/home_view.dart';
+import 'package:clinic/views/login_view.dart';
 import 'package:clinic/views/patient_list_view.dart';
 import 'package:clinic/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class Clinic extends StatelessWidget {
         '/add': (context) => AddPatientView(),
         '/edit': (context) => EditPatientView(),
         '/patient': (context) => PatientListView(),
+        '/login' :(context) => LoginView(),
       },
     );
   }
