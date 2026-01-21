@@ -28,7 +28,7 @@ class _SplashViewState extends State<SplashView> {
           children: [
             CircleAvatar(
               backgroundImage: const AssetImage("assets/images/Clinic_img.jpg"),
-              radius: 120, // حجم طبيعي
+              radius: 120, 
             ),
             const SizedBox(height: 20),
             const Text(
