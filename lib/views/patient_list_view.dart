@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clinic/helpers/databasehelper.dart';
 
 class PatientListView extends StatefulWidget {
   const PatientListView({super.key});
@@ -8,9 +9,22 @@ class PatientListView extends StatefulWidget {
 }
 
 class _PatientListViewState extends State<PatientListView> {
-  List<String> patientNames = ['Issa', 'Alex', 'Maria', 'John'];
-  List<String> patientPhones = ['55555', '44444', '33333', '22222'];
-  List<bool> isMale = [true, false, false, true];
+  List<Map<String, dynamic>> patients = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getPatients();
+  }
+
+  getPatients() async {
+    DatabaseHelper db = DatabaseHelper.instance;
+    List<Map> response = await db.readData(table: 'patients');
+
+    setState(() {
+      patients = response.cast<Map<String, dynamic>>();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +56,16 @@ class _PatientListViewState extends State<PatientListView> {
               ),
               const SizedBox(height: 30),
               Column(
-                children: List.generate(patientNames.length, (index) {
+                children: List.generate(patients.length, (index) {
+                  bool isMale = patients[index]['gender'] == 'Male';
+
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: isMale[index]
+                        color: isMale
                             ? const Color.fromARGB(255, 7, 189, 213)
-                            : const Color.fromARGB(255, 255, 255, 255),
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: const [
                           BoxShadow(
@@ -67,23 +83,24 @@ class _PatientListViewState extends State<PatientListView> {
                         leading: Icon(
                           Icons.person,
                           size: 40,
-                          color: isMale[index]
+                          color: isMale
                               ? Colors.white
                               : const Color.fromARGB(255, 228, 52, 208),
                         ),
                         title: Center(
                           child: Text(
-                            patientNames[index],
+                            patients[index]['name'],
                             style: TextStyle(
                               fontFamily: 'ShortBaby-Mg2w',
                               fontSize: 30,
-                              color: isMale[index] ? Colors.white : Colors.black,
+                              color:
+                                  isMale ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
                         subtitle: Center(
                           child: Text(
-                            patientPhones[index],
+                            patients[index]['phone'],
                             style: const TextStyle(
                               fontFamily: 'ShortBaby-Mg2w',
                               fontSize: 18,
@@ -115,3 +132,4 @@ class _PatientListViewState extends State<PatientListView> {
     );
   }
 }
+

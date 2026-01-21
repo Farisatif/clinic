@@ -17,22 +17,22 @@ class _AddPatientViewState extends State<AddPatientView> {
   String? fullName, phoneNumber, age, medicalNotes, gender;
   bool isMale = true;
 
-  PatientModelData patientData = PatientModelData(
-    fullName: null,
-    phoneNumber: null,
-    age: null,
-    medicalNotes: null,
-    gender: null,
-  );
+  PatientModelData patientData = PatientModelData();
 
-  // insertPatientData() async {
-  //   DatabaseHelper db = DatabaseHelper.instance;
-  //   int response = await db.insertData(
-  //     table: 'patients',
-  //     //values: patientData.toMap(),
-  //   );
-  //   return response;
-  // }
+  insertPatientData() async {
+    // ????? ?????? ??????
+    patientData.fullName = fullName;
+    patientData.phoneNumber = phoneNumber;
+    patientData.age = int.tryParse(age ?? '0');
+    patientData.medicalNotes = medicalNotes;
+    patientData.gender = gender ?? (isMale ? 'Male' : 'Female');
+
+    DatabaseHelper db = DatabaseHelper.instance;
+    await db.insertData(
+      table: 'patients',
+      values: patientData.toMap(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,10 +110,8 @@ class _AddPatientViewState extends State<AddPatientView> {
                         child: CustomTextField(
                           label: 'Age',
                           icon: Icons.access_time,
-                          keyboardType: TextInputType.datetime,
-                          onChanged: (value) {
-                            age = value;
-                          },
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) => age = value,
                         ),
                       ),
                       CustomTextField(
@@ -124,23 +122,25 @@ class _AddPatientViewState extends State<AddPatientView> {
                       ),
                       CustomButton(
                         text: 'Save Patient Data',
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formstate.currentState!.validate()) {
+                            await insertPatientData();
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Saving $fullName Data...'),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  6,
-                                  6,
-                                  6,
-                                ),
+                                content:
+                                    Text('Patient $fullName saved successfully'),
+                                backgroundColor: Colors.green,
                               ),
                             );
+
+                            Navigator.pop(context);
+                          } else {
+                            setState(() {
+                              _autoValidateMode =
+                                  AutovalidateMode.always;
+                            });
                           }
-                          setState(() {
-                            _autoValidateMode = AutovalidateMode.always;
-                          });
                         },
                       ),
                     ],

@@ -14,10 +14,6 @@ class PatientModel {
     required this.icon,
   });
 }
-
-//------------------
-// Patient Data Model
-//------------------
 class PatientModelData {
   final int? id;
   String? fullName;
@@ -28,34 +24,31 @@ class PatientModelData {
 
   PatientModelData({
     this.id,
-    required this.fullName,
-    required this.phoneNumber,
-    required this.age,
-    required this.medicalNotes,
-    required this.gender,
+    this.fullName,
+    this.phoneNumber,
+    this.age,
+    this.medicalNotes,
+    this.gender,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'name': fullName,
       'age': age,
+      'gender': gender,
       'phone': phoneNumber,
       'medical_notes': medicalNotes,
-      'gender': gender,
     };
   }
 
-  // Optional: fromMap if you later read from DB
   factory PatientModelData.fromMap(Map<String, dynamic> map) {
     return PatientModelData(
       id: map['id'] as int?,
       fullName: map['name'] as String?,
-      age: map['age'] as int?,
       phoneNumber: map['phone'] as String?,
+      age: map['age'] as int?,
       medicalNotes: map['medical_notes'] as String?,
       gender: map['gender'] as String?,
     );
   }
 }
-
-
