@@ -51,7 +51,7 @@ class _MyWidgetState extends State<LoginView> {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 150),
+                const SizedBox(height: 85),
                 Form(
                   key: _formstate,
                   autovalidateMode: _autoValidateMode,

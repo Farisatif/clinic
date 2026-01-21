@@ -28,10 +28,7 @@ class _AddPatientViewState extends State<AddPatientView> {
     patientData.gender = gender ?? (isMale ? 'Male' : 'Female');
 
     DatabaseHelper db = DatabaseHelper.instance;
-    await db.insertData(
-      table: 'patients',
-      values: patientData.toMap(),
-    );
+    await db.insertData(table: 'patients', values: patientData.toMap());
   }
 
   @override
@@ -74,6 +71,13 @@ class _AddPatientViewState extends State<AddPatientView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          isMale
+                              ? Icon(Icons.male, color: Colors.black, size: 60)
+                              : Icon(
+                                Icons.female,
+                                color: Colors.pink,
+                                size: 60,
+                              ),
                           Text(
                             isMale ? "Male" : "Female",
                             style: const TextStyle(
@@ -128,8 +132,9 @@ class _AddPatientViewState extends State<AddPatientView> {
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content:
-                                    Text('Patient $fullName saved successfully'),
+                                content: Text(
+                                  'Patient $fullName saved successfully',
+                                ),
                                 backgroundColor: Colors.green,
                               ),
                             );
@@ -137,8 +142,7 @@ class _AddPatientViewState extends State<AddPatientView> {
                             Navigator.pop(context);
                           } else {
                             setState(() {
-                              _autoValidateMode =
-                                  AutovalidateMode.always;
+                              _autoValidateMode = AutovalidateMode.always;
                             });
                           }
                         },
