@@ -2,12 +2,47 @@ import 'package:clinic/widgets/patient_card.dart';
 import 'package:clinic/models/patient_model.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key, required this.isDark, required this.onChanged});
+  final bool isDark;
+  final void Function(bool) onChanged;
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: DrawerHeader(
+          padding: EdgeInsets.only(top: 60),
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundImage: const AssetImage(
+                  "assets/images/Clinic_img.jpg",
+                ),
+                radius: 50,
+              ),
+              SizedBox(height: 50),
+              ListTile(
+                title: Text(
+                  "Dark Mood",
+                  style: TextStyle(fontSize: 20, fontFamily: "ShortBaby-Mg2w"),
+                ),
+                trailing: Switch(
+                  value: widget.isDark,
+                  onChanged: (value) {
+                    widget.onChanged(value);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text(
           "Home",
