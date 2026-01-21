@@ -40,15 +40,16 @@ class PatientModelData {
       'medical_notes': medicalNotes,
     };
   }
-
+// get data the Patient convent to PatientModelData
+//mulitab constractor
   factory PatientModelData.fromMap(Map<String, dynamic> map) {
     return PatientModelData(
-      id: map['id'] as int?,
-      fullName: map['name'] as String?,
-      phoneNumber: map['phone'] as String?,
-      age: map['age'] as int?,
-      medicalNotes: map['medical_notes'] as String?,
-      gender: map['gender'] as String?,
+      id: map['id'] ,
+      fullName: map['name'],
+      phoneNumber: map['phone'] ,
+      age: map['age'],
+      medicalNotes: map['medical_notes'],
+      gender: map['gender'] ,
     );
   }
 }

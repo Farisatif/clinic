@@ -9,35 +9,21 @@ class PatientListView extends StatefulWidget {
 }
 
 class _PatientListViewState extends State<PatientListView> {
-  List<Map<String, dynamic>> patients = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getPatients();
+  Future<List<Map<String, dynamic>>> getPatients() async {
+    final response = await DatabaseHelper.instance.readData(table: 'patients');
+    return response.map((e) => Map<String, dynamic>.from(e)).toList();
   }
 
-  getPatients() async {
-    DatabaseHelper db = DatabaseHelper.instance;
-    List<Map> response = await db.readData(table: 'patients');
-
-    setState(() {
-      patients = response.cast<Map<String, dynamic>>();
-    });
-  }
-
-  deletePatient(int id) async {
-    DatabaseHelper db = DatabaseHelper.instance;
-    await db.deleteData(table: 'patients', id: id);
-    getPatients();
+  // حذف مريض
+  Future<void> deletePatient(int id) async {
+    await DatabaseHelper.instance.deleteData(table: 'patients', id: id);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
-        centerTitle: true,
         title: const Text(
           "Patient List",
           style: TextStyle(
@@ -46,6 +32,8 @@ class _PatientListViewState extends State<PatientListView> {
             color: Colors.white,
           ),
         ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 7, 189, 213),
       ),
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -53,45 +41,65 @@ class _PatientListViewState extends State<PatientListView> {
           children: [
             const Text(
               "Patient List",
-              style: TextStyle(
-                fontSize: 40,
-                fontFamily: 'ShortBaby-Mg2w',
-                color: Colors.black,
-              ),
+              style: TextStyle(fontSize: 40, fontFamily: 'ShortBaby-Mg2w'),
             ),
             const SizedBox(height: 30),
-
-            if (patients.isEmpty)
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.people_outline, size: 120, color: Colors.grey),
-                    SizedBox(height: 20),
-                    Text(
-                      "No patients found",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontFamily: 'ShortBaby-Mg2w',
-                        color: Colors.grey,
+            Expanded(
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: getPatients(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  final patients = snapshot.data ?? [];
+                  if (patients.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.people_outline,
+                            size: 120,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "No patients found",
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontFamily: 'ShortBaby-Mg2w',
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "Add a new patient to see them here",
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Add a new patient to see them here",
-                      style: TextStyle(fontSize: 16, color: Colors.black45),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )
-            else
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: List.generate(patients.length, (index) {
-                      bool isMale = patients[index]['gender'] == 'Male';
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: patients.length,
+                    itemBuilder: (context, index) {
+                      final p = patients[index];
+                      final isMale =
+                          (p['gender']?.toString() ?? 'Male') == 'Male';
+
+                      // تحويل البيانات لتمريرها إلى صفحة التعديل
+                      final normalized = <String, dynamic>{
+                        'id': p['id'],
+                        'name': p['name'],
+                        'phone': p['phone'],
+                        'age': p['age'],
+                        'gender': p['gender'],
+                        'medicalNotes': p['medical_notes'],
+                      };
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -118,14 +126,11 @@ class _PatientListViewState extends State<PatientListView> {
                             leading: Icon(
                               Icons.person,
                               size: 40,
-                              color:
-                                  isMale
-                                      ? Colors.white
-                                      : const Color.fromARGB(255, 228, 52, 208),
+                              color: isMale ? Colors.white : Colors.black,
                             ),
                             title: Center(
                               child: Text(
-                                patients[index]['name'],
+                                p['name']?.toString() ?? '',
                                 style: TextStyle(
                                   fontFamily: 'ShortBaby-Mg2w',
                                   fontSize: 30,
@@ -135,7 +140,7 @@ class _PatientListViewState extends State<PatientListView> {
                             ),
                             subtitle: Center(
                               child: Text(
-                                patients[index]['phone'],
+                                p['phone']?.toString() ?? '',
                                 style: const TextStyle(
                                   fontFamily: 'ShortBaby-Mg2w',
                                   fontSize: 18,
@@ -151,7 +156,14 @@ class _PatientListViewState extends State<PatientListView> {
                                     Icons.edit,
                                     color: Colors.blue,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    final result = await Navigator.pushNamed(
+                                      context,
+                                      '/edit',
+                                      arguments: normalized,
+                                    );
+                                    if (result == true) setState(() {});
+                                  },
                                 ),
                                 IconButton(
                                   icon: const Icon(
@@ -159,19 +171,19 @@ class _PatientListViewState extends State<PatientListView> {
                                     size: 30,
                                     color: Colors.red,
                                   ),
-                                  onPressed: () {
-                                    deletePatient(patients[index]['id']);
-                                  },
+                                  onPressed:
+                                      () => deletePatient(p['id'] as int),
                                 ),
                               ],
                             ),
                           ),
                         ),
                       );
-                    }),
-                  ),
-                ),
+                    },
+                  );
+                },
               ),
+            ),
           ],
         ),
       ),

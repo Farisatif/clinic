@@ -20,7 +20,6 @@ class _AddPatientViewState extends State<AddPatientView> {
   PatientModelData patientData = PatientModelData();
 
   insertPatientData() async {
-    // ????? ?????? ??????
     patientData.fullName = fullName;
     patientData.phoneNumber = phoneNumber;
     patientData.age = int.tryParse(age ?? '0');
